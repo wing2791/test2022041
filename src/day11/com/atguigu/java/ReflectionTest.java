@@ -2,10 +2,12 @@ package day11.com.atguigu.java;
 
 import org.junit.Test;
 
+import java.io.FileInputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Properties;
 
 public class ReflectionTest {
 
@@ -83,10 +85,38 @@ public class ReflectionTest {
 //    此过程成为类的加载。加载到内存中的类，我们就成为运行时类，此运行时类，
 //    就作为Class的一个实例。
 //    2.换句话说，Class的实例就对应着一个运行时类。
-        public void test3(){
-            //方式一：调用运行时类的属性：.class
-            Class clazz1 = Person.class;
-            System.out.println(clazz1);
-        }
+//    3.加载到内存中的运行时类，会缓存一定的时间，在此时间之内，我们可以通过不同的方式来
+//    获取此运行时类
+    @Test
+    public void test3() throws ClassNotFoundException {
+        //方式一：调用运行时类的属性：.class
+        Class clazz1 = Person.class;
+        System.out.println(clazz1);
+
+        //方式二：通过运行时类的对象，调用getClass()
+        Person p1 = new Person();
+        Class clazz2 = p1.getClass();
+        System.out.println(clazz2);
+
+        //方式三：调用Class的静态方法：forName(String classPath)
+        Class clazz3 = Class.forName("com.atguigu.java.Person");
+        System.out.println(clazz3);
+
+//        方式四：使用类的加载器：ClassLoader
+        ClassLoader classLoader = ReflectionTest.class.getClassLoader();
+        Class clazz4 = classLoader.loadClass("com.atguigu.java.Person");
+        System.out.println(clazz4);
+
+
+
+    }
+    @Test
+    public void test2(){
+        Properties pros = new Properties();
+        FileInputStream fis = new FileInputStream();
+        pros.load();
+    }
+
+
 
 }
