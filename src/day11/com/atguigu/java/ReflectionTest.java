@@ -3,6 +3,7 @@ package day11.com.atguigu.java;
 import org.junit.Test;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -111,10 +112,14 @@ public class ReflectionTest {
 
     }
     @Test
-    public void test2(){
+    public void test4() throws Exception {
         Properties pros = new Properties();
-        FileInputStream fis = new FileInputStream();
-        pros.load();
+        FileInputStream fis = new FileInputStream("jdbc.propreties");
+        pros.load(fis);
+
+        String user = pros.getProperty("user");
+        String password = pros.getProperty("password");
+        System.out.println("user ="+user+",password"+password);
     }
 
 
