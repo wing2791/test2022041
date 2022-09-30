@@ -53,6 +53,7 @@ enum Season1 implements Info{
             System.out.println("这是夏天的show()方法");
             System.out.println("这是夏天的show()方法2");
             System.out.println("这是夏天的show()方法4");
+            System.out.println("这是夏天的show()方法3");
         }
     },
     AUTUMN("秋天","秋高气爽"){
