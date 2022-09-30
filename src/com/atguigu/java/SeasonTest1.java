@@ -51,6 +51,7 @@ enum Season1 implements Info{
         @Override
         public void show() {
             System.out.println("这是夏天的show()方法");
+            System.out.println("这是夏天的show()方法2");
         }
     },
     AUTUMN("秋天","秋高气爽"){
