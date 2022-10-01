@@ -3,10 +3,9 @@ package day11.com.atguigu.java;
 import org.junit.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
@@ -92,7 +91,7 @@ public class ReflectionTest {
     public void test3() throws ClassNotFoundException {
         //方式一：调用运行时类的属性：.class
         Class clazz1 = Person.class;
-        System.out.println(clazz1);
+        System.out.println(clazz1+"1");
 
         //方式二：通过运行时类的对象，调用getClass()
         Person p1 = new Person();
@@ -100,12 +99,12 @@ public class ReflectionTest {
         System.out.println(clazz2);
 
         //方式三：调用Class的静态方法：forName(String classPath)
-        Class clazz3 = Class.forName("com.atguigu.java.Person");
+        Class clazz3 = Class.forName("day11.com.atguigu.java.Person");
         System.out.println(clazz3);
 
 //        方式四：使用类的加载器：ClassLoader
         ClassLoader classLoader = ReflectionTest.class.getClassLoader();
-        Class clazz4 = classLoader.loadClass("com.atguigu.java.Person");
+        Class clazz4 = classLoader.loadClass("day11.com.atguigu.java.Person");
         System.out.println(clazz4);
 
 
@@ -113,9 +112,17 @@ public class ReflectionTest {
     }
     @Test
     public void test4() throws Exception {
+        //此时默认在当前的module下(即在和src同一个地方)
         Properties pros = new Properties();
-        FileInputStream fis = new FileInputStream("jdbc.propreties");
-        pros.load(fis);
+//        FileInputStream fis = new FileInputStream("./src/day11/com/atguigu/java/jdbc1.properties");
+//        pros.load(fis);
+
+
+        ClassLoader classLoader = ReflectionTest.class.getClassLoader();
+        //src下
+        InputStream is = classLoader.getResourceAsStream("jdbc1.properties");
+        pros.load(is);
+
 
         String user = pros.getProperty("user");
         String password = pros.getProperty("password");
